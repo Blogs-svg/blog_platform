@@ -1,0 +1,18 @@
+[
+  {
+    "id": "welcome-post-001",
+    "title": "Platformaga xush kelibsiz!",
+    "content": "Bu sizning yangi blog platformangiz. Ro'yxatdan o'ting, tizimga kiring va o'z maqolalaringizni yozishni boshlang. Har bir foydalanuvchi o'z postlarini yaratishi, tahrirlashi va o'chirishi mumkin.",
+    "author": "Admin",
+    "authorId": "system",
+    "createdAt": "2026-01-01T10:00:00.000Z"
+  },
+  {
+    "id": "YPaHzADhPV",
+    "title": "Birinchi yutuq",
+    "content": "Bu meinng birinchi to'liq avtomatik ravishda ishlayotgan platformam men bu platformani ishlab chiqish uchun 23-marta urinish qildim va 24-sida bu platforma tolqi ishladi",
+    "author": "Jasurbek",
+    "authorId": "hyw6Ud_42_",
+    "createdAt": "2026-09-14T08:22:34.755Z"
+  }
+]

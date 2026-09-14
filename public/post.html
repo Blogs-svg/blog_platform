@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post — Blog Platformasi</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="/index.html" class="logo">Qalam<span>Blog</span></a>
+      <div class="nav-links" id="nav-links"></div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+      <a href="/index.html" class="back-link">&larr; Bosh sahifaga qaytish</a>
+      <div id="post-container" class="post-detail"></div>
+    </div>
+  </main>
+
+  <script src="/js/main.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const postId = params.get('id');
+
+    async function loadPost() {
+      const container = document.getElementById('post-container');
+      if (!postId) {
+        container.innerHTML = `<div class="empty-state">Post topilmadi.</div>`;
+        return;
+      }
+
+      const res = await fetch(`/api/posts/${postId}`);
+      if (!res.ok) {
+        container.innerHTML = `<div class="empty-state">Post topilmadi yoki o'chirilgan.</div>`;
+        return;
+      }
+      const post = await res.json();
+
+      container.innerHTML = `
+        <h1>${escapeHtml(post.title)}</h1>
+        <div class="post-meta">${escapeHtml(post.author)} · ${formatDate(post.createdAt)}</div>
+        <div class="post-content">${escapeHtml(post.content)}</div>
+        <div id="owner-actions"></div>
+      `;
+
+      document.addEventListener('session-ready', (e) => {
+        const user = e.detail;
+        if (user && user.id === post.authorId) {
+          document.getElementById('owner-actions').innerHTML = `
+            <div class="post-actions">
+              <a href="/dashboard.html?edit=${post.id}" class="btn btn-outline">Tahrirlash</a>
+            </div>
+          `;
+        }
+      });
+
+      // Agar sessiya oldinroq tayyor bo'lsa
+      if (window.__currentUser && window.__currentUser.id === post.authorId) {
+        document.getElementById('owner-actions').innerHTML = `
+          <div class="post-actions">
+            <a href="/dashboard.html?edit=${post.id}" class="btn btn-outline">Tahrirlash</a>
+          </div>
+        `;
+      }
+    }
+
+    loadPost();
+  </script>
+</body>
+</html>

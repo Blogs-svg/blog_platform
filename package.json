@@ -1,0 +1,15 @@
+{
+  "name": "blog-platform",
+  "version": "1.0.0",
+  "description": "Ro'yxatdan o'tish tizimi bilan blog platformasi",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "bcryptjs": "^2.4.3",
+    "nanoid": "^3.3.7"
+  }
+}
